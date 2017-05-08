@@ -1,10 +1,12 @@
 
 function init() {
 	var vars = new varInitials();
+	document.turn = "X";
 	printTable(vars.tablePosition);
 	var gamers = new playersNumber();
 	players(gamers.quantity);
-	printPlayers(gamers.quantity);
+	printPlayers(gamers.cpu);
+	turnPlayer();
 }
 
 function varInitials() {
@@ -30,10 +32,10 @@ function printTable(tablePosition) {
 		}
 	}
 }
-function printPlayers(quantity){
+function printPlayers(cpu){
 	for (var i = 1; i <= 2; i++) {
 		if (i == 2) {
-			if (quantity == 1) {
+			if (cpu) {
 				document.getElementById('player_'+ i).innerHTML += '<strong>'+ window["player_" + i].name + ' CPU</strong>' ;
 				break;
 			}
@@ -45,10 +47,12 @@ function playersNumber() {
 	var num = parseInt(prompt('cantidad de jugadores'));
 	if (num <= 2 && num >= 1) {
 		this.quantity = num;
+		this.cpu = false;
 		if (num == 1) {
 			var names = ['xavi', 'randol', 'alex', 'maury', 'carlos', 'jhosy'];
 			pointer = Math.floor(Math.random() * names.length);
 			player_2 = new playerName(names[pointer]);
+			this.cpu = true;
 		}
 	}else{
 		playersNumber();
@@ -57,12 +61,19 @@ function playersNumber() {
 function players(quantity) {
 	for (var i = 1; i <= quantity; i++) {
 		window['player_'+i] = new playerName(prompt("nombre del jugador N°" + i)); 
-	}
+  }
 }
 function playerName(name){
 	this.name = name;
 }
+function starGame(argument) {
 
+}
+function turnPlayer(argument) {
+	document.querySelector('#GameTable').addEventListener('click', function(e){
+    e.target.innerText = document.turn;
+  });
+}
 init()
 // function callClick(){
 // 	document.getElementsByClassName('item-table').addEventListener('click', clikcs);
