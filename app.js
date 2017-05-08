@@ -1,12 +1,14 @@
 
 function init() {
 	var vars = new varInitials();
-	document.turn = "X";
-	printTable(vars.tablePosition);
-	var gamers = new playersNumber();
-	players(gamers.quantity);
-	printPlayers(gamers.cpu);
-	turnPlayer();
+  printTable(vars.tablePosition);
+  var gamers = new playersNumber();
+  players(gamers.quantity);
+  printPlayers(gamers.cpu);
+  turnPlayer();
+  document.turn = player_1.turn;
+	document.name = player_1.name;
+
 }
 
 function varInitials() {
@@ -27,7 +29,7 @@ function varInitials() {
 function printTable(tablePosition) {
 	for (var i = 0; i < tablePosition.length; i++) {
 		for (var p = 0; p < tablePosition[i].length; p++) {
-			var item = '<li class="item-table">+</li>';
+			var item = '<li class="item-table"></li>';
 			document.getElementById('GameTable').innerHTML += item;
 		}
 	}
@@ -62,25 +64,33 @@ function players(quantity) {
 	for (var i = 1; i <= quantity; i++) {
 		window['player_'+i] = new playerName(prompt("nombre del jugador N°" + i)); 
   }
+  player_1.turn = 'X';
+  player_2.turn = 'O';
 }
 function playerName(name){
 	this.name = name;
 }
-function starGame(argument) {
-
+function message(msg){
+  document.querySelector('#message').innerText = msg;
 }
-function turnPlayer(argument) {
+function turnPlayer() {
 	document.querySelector('#GameTable').addEventListener('click', function(e){
-    e.target.innerText = document.turn;
+    if (e.target.innerText == '') {
+      e.target.innerText = document.turn;
+      message("turno de " + document.name);
+      switch (document.turn) {
+        case 'X':
+        document.turn = 'O'
+        document.name = player_2.name;
+          break;
+        default:
+        document.turn = 'X'
+        document.name = player_1.name;
+          break;
+      }
+    }
   });
 }
+
+
 init()
-// function callClick(){
-// 	document.getElementsByClassName('item-table').addEventListener('click', clikcs);
-// }
-
-// function clikcs(argument) {
-// 	console.log("DSads")
-// }
-
-// callClick()
