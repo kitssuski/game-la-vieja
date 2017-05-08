@@ -1,9 +1,13 @@
+body{
+	background-color: #f8f8f8;
+}
 #GameTable{
 	display: flex;
 	flex-wrap: wrap;
 	max-width: 640px;
 	width: 100%;
 	margin: 0 auto;
+	background-color: #14bdac;
 }
 #GameTable li{
 	width: 33.333333333%;

@@ -1,4 +1,4 @@
-
+'use strict'
 function init() {
 	var vars = new varInitials();
   printTable(vars.tablePosition);
@@ -8,7 +8,7 @@ function init() {
   turnPlayer();
   document.turn = player_1.turn;
 	document.name = player_1.name;
-
+  console.log(player_2);
 }
 
 function varInitials() {
@@ -52,8 +52,8 @@ function playersNumber() {
 		this.cpu = false;
 		if (num == 1) {
 			var names = ['xavi', 'randol', 'alex', 'maury', 'carlos', 'jhosy'];
-			pointer = Math.floor(Math.random() * names.length);
-			player_2 = new playerName(names[pointer]);
+			var pointer = Math.floor(Math.random() * names.length);
+			window['player_2'] = new playerName(names[pointer]);
 			this.cpu = true;
 		}
 	}else{
